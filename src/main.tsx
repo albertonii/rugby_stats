@@ -1,23 +1,25 @@
 import "./index.css";
 import App from "./App";
 import ReactDOM from "react-dom/client";
-import { Auth0Provider } from "@auth0/auth0-react";
-import { AuthProvider } from "./contexts/AuthContext";
-
-console.log("window.location.origin:", window.location.origin);
+import { AuthProviderManual } from "./contexts/AuthContextManual";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
-  <Auth0Provider
-    domain={import.meta.env.VITE_AUTH0_DOMAIN}
-    clientId={import.meta.env.VITE_AUTH0_CLIENT_ID}
-    authorizationParams={{
-      redirect_uri: `${window.location.origin}/callback`,
-      audience: import.meta.env.VITE_AUTH0_AUDIENCE,
-    }}
-    cacheLocation="localstorage" // Asegura persistencia
-  >
-    <AuthProvider>
-      <App />
-    </AuthProvider>
-  </Auth0Provider>
+  <AuthProviderManual>
+    {/* // <Auth0Provider
+  //   domain={import.meta.env.VITE_AUTH0_DOMAIN}
+  //   clientId={import.meta.env.VITE_AUTH0_CLIENT_ID}
+  //   authorizationParams={{
+  //     redirect_uri: `${window.location.origin}/callback`,
+  //     audience: import.meta.env.VITE_AUTH0_AUDIENCE,
+  //     scope: "openid profile email read:stats write:stats", // Scopes definidos
+  //   }}
+  //   cacheLocation="memory" // Asegura persistencia
+  //   useRefreshTokens={true} // Mejora el manejo de tokens
+  // > */}
+    {/* <AuthProvider> */}
+    <App />
+
+    {/* </AuthProvider> */}
+    {/* </Auth0Provider> */}
+  </AuthProviderManual>
 );

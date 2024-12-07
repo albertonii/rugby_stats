@@ -1,5 +1,5 @@
-import { Navigate, useLocation } from 'react-router-dom';
-import { useAuth } from '../../contexts/AuthContext';
+import { Navigate, useLocation } from "react-router-dom";
+import { useAuth } from "../../contexts/AuthContextManual";
 
 interface PrivateRouteProps {
   children: React.ReactNode;
@@ -7,13 +7,21 @@ interface PrivateRouteProps {
   requireDelegate?: boolean;
 }
 
-const PrivateRoute = ({ 
-  children, 
+const PrivateRoute = ({
+  children,
   requireAdmin = false,
-  requireDelegate = false 
+  requireDelegate = false,
 }: PrivateRouteProps) => {
-  const { isAuthenticated, isAdmin, isClubDelegate } = useAuth();
+  // const { isAuthenticated, isAdmin, isClubDelegate } = useAuth();
+  const { isAuthenticated, isAdmin, isClubDelegate, isLoading } = useAuth();
+
   const location = useLocation();
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  console.log(isClubDelegate);
 
   if (!isAuthenticated) {
     return <Navigate to="/login" state={{ from: location }} replace />;

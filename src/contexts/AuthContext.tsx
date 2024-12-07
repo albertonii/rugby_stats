@@ -7,8 +7,19 @@ import {
   ReactNode,
 } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
-import { jwtDecode } from "jwt-decode"; // Corregido
+import { jwtDecode } from "jwt-decode";
 import { UserRoles } from "../types"; // Asegúrate de tener este tipo definido
+
+export interface CustomJwtPayload {
+  sub: string;
+  name: string;
+  email: string;
+  "https://rugby-stats.com/roles"?: string[];
+  "https://rugby-stats.com/clubId"?: number;
+  exp?: number;
+  iat?: number;
+  // Añade otros campos estándar si es necesario
+}
 
 interface AuthContextType {
   isAuthenticated: boolean;
@@ -50,7 +61,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
           const token = await getAccessTokenSilently();
           console.log("Token obtained:", token); // For debugging
 
-          const decodedToken = jwtDecode(token);
+          console.log(token);
+          const decodedToken: CustomJwtPayload = jwtDecode(token);
           console.log("Decoded token:", decodedToken); // For debugging
 
           // Obtener roles del token

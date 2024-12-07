@@ -1,4 +1,3 @@
-import { useAuth0 } from "@auth0/auth0-react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import ClubsList from "./components/ClubsList";
@@ -11,7 +10,6 @@ import MatchView from "./components/matches/MatchView";
 import CompetitionList from "./components/competitions/CompetitionList";
 import CompetitionView from "./components/competitions/CompetitionView";
 import GlobalStats from "./components/stats/GlobalStats";
-import LoginPage from "./components/auth/LoginPage";
 import UnauthorizedPage from "./components/auth/UnauthorizedPage";
 import PrivateRoute from "./components/auth/PrivateRoute";
 
@@ -25,20 +23,18 @@ import AdminTeamsList from "./components/admin/teams/TeamsList";
 import CategoriesList from "./components/admin/categories/CategoriesList";
 import CompetitionsList from "./components/admin/competitions/CompetitionsList";
 import GeneralSettings from "./components/admin/settings/GeneralSettings";
-import CallbackPage from "./components/auth/CallbackPage";
+import LoginPageManual from "./components/auth/LoginPageManual";
+import CallbackPageManual from "./components/auth/CallbackPageManual";
+import TokenPage from "./components/HomePage";
 
 export default function App() {
-  const { isLoading, error } = useAuth0();
-
-  if (isLoading) return <div>Loading...</div>;
-  if (error) return <div>Error: {error.message}</div>;
-
   return (
     <Router>
       <Routes>
-        <Route path="/login" element={<LoginPage />} />
+        <Route path="/login" element={<LoginPageManual />} />
         <Route path="/unauthorized" element={<UnauthorizedPage />} />
-        <Route path="/callback" element={<CallbackPage />} />
+        <Route path="/callback" element={<CallbackPageManual />} />
+        <Route path="/token" element={<TokenPage />} />
 
         <Route
           path="*"
