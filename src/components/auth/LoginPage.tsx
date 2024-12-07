@@ -1,14 +1,17 @@
 import { useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthContext";
+import { useAuth0 } from "@auth0/auth0-react";
 
 const LoginPage = () => {
   const { login, isAuthenticated, isAdmin, isClubDelegate } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
+  const { loginWithRedirect } = useAuth0();
 
   useEffect(() => {
     if (isAuthenticated) {
+      console.log("DENTRO DE LOGIN PAGE");
       if (isAdmin || isClubDelegate) {
         const from = location.state?.from?.pathname || "/admin";
         navigate(from, { replace: true });
@@ -17,6 +20,8 @@ const LoginPage = () => {
       }
     }
   }, [isAuthenticated, isAdmin, isClubDelegate, navigate, location]);
+
+  return <button onClick={() => loginWithRedirect()}>Log In</button>;
 
   return (
     <div className="min-h-screen bg-gray-100 flex items-center justify-center">

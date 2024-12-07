@@ -1,3 +1,4 @@
+import { useAuth0 } from "@auth0/auth0-react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import ClubsList from "./components/ClubsList";
@@ -24,13 +25,20 @@ import AdminTeamsList from "./components/admin/teams/TeamsList";
 import CategoriesList from "./components/admin/categories/CategoriesList";
 import CompetitionsList from "./components/admin/competitions/CompetitionsList";
 import GeneralSettings from "./components/admin/settings/GeneralSettings";
+import CallbackPage from "./components/auth/CallbackPage";
 
 export default function App() {
+  const { isLoading, error } = useAuth0();
+
+  if (isLoading) return <div>Loading...</div>;
+  if (error) return <div>Error: {error.message}</div>;
+
   return (
     <Router>
       <Routes>
         <Route path="/login" element={<LoginPage />} />
         <Route path="/unauthorized" element={<UnauthorizedPage />} />
+        <Route path="/callback" element={<CallbackPage />} />
 
         <Route
           path="*"

@@ -1,3 +1,4 @@
+// src/contexts/AuthContext.jsx o src/contexts/AuthContext.tsx
 import {
   createContext,
   useContext,
@@ -6,8 +7,8 @@ import {
   ReactNode,
 } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
-import { jwtDecode } from "jwt-decode";
-import { UserRoles } from "../types";
+import { jwtDecode } from "jwt-decode"; // Corregido
+import { UserRoles } from "../types"; // Asegúrate de tener este tipo definido
 
 interface AuthContextType {
   isAuthenticated: boolean;
@@ -46,20 +47,14 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
       if (isAuthenticated && user) {
         try {
-          const token = await getAccessTokenSilently({
-            authorizationParams: {
-              audience: "https://rugby-stats.com/api",
-              scope: "openid profile email",
-            },
-          });
-
+          const token = await getAccessTokenSilently();
           console.log("Token obtained:", token); // For debugging
 
           const decodedToken = jwtDecode(token);
           console.log("Decoded token:", decodedToken); // For debugging
 
-          // Get roles from the token
-          const namespace = "https://rugby-stats.com";
+          // Obtener roles del token
+          const namespace = "https://rugby-stats.com"; // Asegúrate de que coincida con tu configuración en Auth0
           const roles = decodedToken[`${namespace}/roles`] || [];
           const clubId = decodedToken[`${namespace}/clubId`];
 
@@ -71,17 +66,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
             isClubDelegate,
             clubId,
           });
-
-          // Only redirect if we're not already on the admin page
-          // if (
-          //   (isAdmin || isClubDelegate) &&
-          //   !location.pathname.startsWith("/admin")
-          // ) {
-          //   window.location.href = "/admin";
-          // }
         } catch (error) {
           console.error("Error getting access token:", error);
-          // Handle token error - maybe redirect to login
+          // Manejar el error del token, por ejemplo, cerrar sesión
           auth0Logout({
             logoutParams: {
               returnTo: window.location.origin,
@@ -94,18 +81,13 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     if (!isLoading) {
       getUserRoles();
     }
-  }, [
-    isAuthenticated,
-    user,
-    getAccessTokenSilently,
-    location.pathname,
-    isLoading,
-  ]);
+  }, [isAuthenticated, user, getAccessTokenSilently, isLoading]);
 
-  // Handle authentication errors
+  // Manejar errores de autenticación
   useEffect(() => {
     if (error) {
       console.error("Auth0 error:", error);
+      // Puedes redirigir a una página de error o mostrar un mensaje
       // window.location.href = "/";
     }
   }, [error]);
@@ -118,10 +100,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     user,
     login: () =>
       loginWithRedirect({
-        authorizationParams: {
-          audience: "https://dev-ewwuhrnxs8ffun1f.eu.auth0.com/api/v2/",
-          scope: "openid profile email",
-        },
         appState: { returnTo: window.location.pathname },
       }),
     logout: () =>

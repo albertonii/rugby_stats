@@ -1,22 +1,23 @@
-import React from "react";
+import "./index.css";
+import App from "./App";
 import ReactDOM from "react-dom/client";
 import { Auth0Provider } from "@auth0/auth0-react";
-import App from "./App";
 import { AuthProvider } from "./contexts/AuthContext";
-import "./index.css";
+
+console.log("window.location.origin:", window.location.origin);
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
-  <React.StrictMode>
-    <Auth0Provider
-      domain={import.meta.env.VITE_AUTH0_DOMAIN}
-      clientId={import.meta.env.VITE_AUTH0_CLIENT_ID}
-      authorizationParams={{
-        redirect_uri: window.location.origin,
-        audience: import.meta.env.VITE_AUTH0_AUDIENCE,
-      }}>
-      <AuthProvider>
-        <App />
-      </AuthProvider>
-    </Auth0Provider>
-  </React.StrictMode>
+  <Auth0Provider
+    domain={import.meta.env.VITE_AUTH0_DOMAIN}
+    clientId={import.meta.env.VITE_AUTH0_CLIENT_ID}
+    authorizationParams={{
+      redirect_uri: `${window.location.origin}/callback`,
+      audience: import.meta.env.VITE_AUTH0_AUDIENCE,
+    }}
+    cacheLocation="localstorage" // Asegura persistencia
+  >
+    <AuthProvider>
+      <App />
+    </AuthProvider>
+  </Auth0Provider>
 );
