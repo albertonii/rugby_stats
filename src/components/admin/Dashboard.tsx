@@ -1,12 +1,12 @@
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { 
-  UsersIcon, 
-  ClipboardDocumentListIcon, 
-  TrophyIcon, 
+import { useState } from "react";
+import { Link } from "react-router-dom";
+import {
+  UsersIcon,
+  ClipboardDocumentListIcon,
+  TrophyIcon,
   UserGroupIcon,
-  HomeIcon
-} from '@heroicons/react/24/outline';
+  HomeIcon,
+} from "@heroicons/react/24/outline";
 
 const Dashboard = () => {
   const [stats] = useState({
@@ -18,33 +18,33 @@ const Dashboard = () => {
 
   const quickActions = [
     {
-      name: 'Gestionar Usuarios',
-      description: 'Administrar delegados y staff',
+      name: "Gestionar Usuarios",
+      description: "Administrar delegados y staff",
       icon: UsersIcon,
-      to: '/admin/users',
-      color: 'bg-blue-500'
+      to: "/admin/users",
+      color: "bg-blue-500",
     },
     {
-      name: 'Jugadores',
-      description: 'Gestionar jugadores',
+      name: "Jugadores",
+      description: "Gestionar jugadores",
       icon: UserGroupIcon,
-      to: '/admin/players',
-      color: 'bg-green-500'
+      to: "/admin/players",
+      color: "bg-green-500",
     },
     {
-      name: 'Competiciones',
-      description: 'Gestionar ligas y torneos',
+      name: "Competiciones",
+      description: "Gestionar ligas y torneos",
       icon: TrophyIcon,
-      to: '/admin/competitions',
-      color: 'bg-purple-500'
+      to: "/admin/competitions",
+      color: "bg-purple-500",
     },
     {
-      name: 'Categorías',
-      description: 'Gestionar categorías',
+      name: "Categorías",
+      description: "Gestionar categorías",
       icon: ClipboardDocumentListIcon,
-      to: '/admin/categories',
-      color: 'bg-orange-500'
-    }
+      to: "/admin/categories",
+      color: "bg-orange-500",
+    },
   ];
 
   return (
@@ -52,14 +52,14 @@ const Dashboard = () => {
       <div className="flex justify-between items-center">
         <div>
           <h1 className="text-2xl font-bold">Panel de Control</h1>
-          <Link to="/" className="text-blue-600 hover:text-blue-800 flex items-center mt-2">
+          <Link
+            to="/"
+            className="text-blue-600 hover:text-blue-800 flex items-center mt-2">
             <HomeIcon className="h-5 w-5 mr-1" />
             Volver al inicio
           </Link>
         </div>
-        <div className="text-sm text-gray-500">
-          Temporada 2023/2024
-        </div>
+        <div className="text-sm text-gray-500">Temporada 2023/2024</div>
       </div>
 
       {/* Estadísticas Generales */}
@@ -88,9 +88,9 @@ const Dashboard = () => {
           <Link
             key={action.name}
             to={action.to}
-            className="bg-white p-6 rounded-lg shadow hover:shadow-md transition-shadow"
-          >
-            <div className={`inline-flex p-3 rounded-lg ${action.color} text-white mb-4`}>
+            className="bg-white p-6 rounded-lg shadow hover:shadow-md transition-shadow">
+            <div
+              className={`inline-flex p-3 rounded-lg ${action.color} text-white mb-4`}>
               <action.icon className="h-6 w-6" />
             </div>
             <h3 className="font-semibold mb-1">{action.name}</h3>
@@ -120,7 +120,9 @@ const Dashboard = () => {
           <div className="flex items-center justify-between py-2">
             <div>
               <p className="font-medium">Nueva competición creada</p>
-              <p className="text-sm text-gray-500">Copa Canaria Senior Masculino</p>
+              <p className="text-sm text-gray-500">
+                Copa Canaria Senior Masculino
+              </p>
             </div>
             <span className="text-sm text-gray-500">Hace 1 día</span>
           </div>

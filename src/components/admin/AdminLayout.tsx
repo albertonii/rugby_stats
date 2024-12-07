@@ -1,9 +1,9 @@
-import { Outlet } from 'react-router-dom';
-import AdminSidebar from './AdminSidebar';
+import { Outlet } from "react-router-dom";
+import AdminSidebar from "./AdminSidebar";
 
 const AdminLayout = () => {
   return (
-    <div className="flex min-h-screen bg-gray-100">
+    <div className="flex min-h-screen bg-gray-100 pt-8">
       <AdminSidebar />
       <main className="flex-1 p-8">
         <Outlet />
