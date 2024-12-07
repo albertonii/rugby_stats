@@ -90,14 +90,16 @@ const CompetitionsList = () => {
 
   return (
     <div className="space-y-6">
-      <div className="flex justify-between items-center">
+      {/* Header */}
+      <div className="flex flex-col md:flex-row justify-between items-start md:items-center">
         <div>
           <h1 className="text-2xl font-bold">Gestión de Competiciones</h1>
           <Link to="/" className="text-blue-600 hover:text-blue-800">
             ← Volver al inicio
           </Link>
         </div>
-        <div className="space-x-2">
+
+        <div className="mt-4 md:mt-0 flex flex-wrap gap-2">
           <button
             onClick={handleExportExcel}
             className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700">
@@ -124,7 +126,7 @@ const CompetitionsList = () => {
         <select
           value={filterCategory}
           onChange={(e) => setFilterCategory(e.target.value)}
-          className="px-4 py-2 border rounded-lg">
+          className="w-full md:w-auto px-4 py-2 border rounded-lg">
           <option value="">Todas las categorías</option>
           <option value="Senior Masculino">Senior Masculino</option>
           <option value="Senior Femenino">Senior Femenino</option>

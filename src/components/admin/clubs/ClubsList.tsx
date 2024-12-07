@@ -81,21 +81,22 @@ const ClubsList = () => {
 
   return (
     <div className="space-y-6">
-      <div className="flex justify-between items-center">
+      {/* Header */}
+      <div className="flex flex-col md:flex-row justify-between items-start md:items-center">
         <div>
           <h1 className="text-2xl font-bold">Gestión de Clubes</h1>
           <Link to="/" className="text-blue-600 hover:text-blue-800">
             ← Volver al inicio
           </Link>
         </div>
-        <div className="space-x-2">
+        <div className="mt-4 md:mt-0 flex flex-wrap gap-2">
           <button
-            onClick={handleExportExcel}
+            onClick={() => handleExportExcel()}
             className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700">
             Exportar Excel
           </button>
           <button
-            onClick={handleExportPDF}
+            onClick={() => handleExportPDF()}
             className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700">
             Exportar PDF
           </button>
@@ -110,7 +111,8 @@ const ClubsList = () => {
         </div>
       </div>
 
-      <div>
+      {/* Filtros */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <select
           value={filterIsland}
           onChange={(e) => setFilterIsland(e.target.value)}
