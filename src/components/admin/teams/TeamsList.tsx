@@ -76,14 +76,12 @@ const TeamsList = () => {
         </div>
         <div className="mt-4 md:mt-0 flex flex-wrap gap-2">
           <button
-            onClick={() => exportToExcel(teamsList, "equipos")}
+            onClick={() => handleExportExcel()}
             className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700">
             Exportar Excel
           </button>
           <button
-            onClick={() =>
-              exportToPDF(teamsList, ["name", "category", "season"], "equipos")
-            }
+            onClick={() => handleExportPDF()}
             className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700">
             Exportar PDF
           </button>
