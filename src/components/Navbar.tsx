@@ -5,12 +5,10 @@ import {
   ChartBarIcon,
   XMarkIcon,
   Bars3Icon,
-  PlayCircleIcon,
   TrophyIcon,
   UserGroupIcon,
 } from "@heroicons/react/24/outline";
 import { useAuth } from "../contexts/AuthContextManual";
-import MatchDetails from "./matches/MatchDetails";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
